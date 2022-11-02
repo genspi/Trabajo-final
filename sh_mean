@@ -1,0 +1,30 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[5]:
+
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+df = pd.read_csv('coa2pc.csv', sep=';'  )
+df.head()
+
+
+# In[4]:
+
+
+df_mean = df.groupby(['year','provincia'])['sh_gob'].mean().to_frame()
+df_mean
+
+
+# In[ ]:
+
+
+grid = sns.FacetGrid(df_mean, col = "provincia")
+grid.map(sns.scatterplot, "transf", "sh_gob")
+plt.figure(figsize=(100,200))
+grid.add_legend()
+
+plt.show()
+
